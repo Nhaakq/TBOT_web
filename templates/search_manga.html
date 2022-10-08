@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{{ super() }}
+
+<!-- Content Header (Page header) -->
+<section class="content-header ">
+    <h1>
+        Search Manga
+        <small>You can search here Manga to download</small>
+    </h1>
+</section>
+
+<section class="content">
+
+    <form action="/search-manga" method="POST">
+        <div class="input-group mb-3">
+            <button type="submit" class="input-group-text text-white btn-primary"><i class="bi bi-search me-2"></i>
+                Search</button>
+            <input id="query" name="query" type="text" class="form-control form-control-lg" placeholder="Manga search">
+        </div>
+    </form>
+    {% if searched_term is defined %}
+    <p>La recherche est : {{ searched_term }}</p>
+    {% endif %}
+    {% for value in list_infos_manga|batch(3, '&nbsp;') %}
+    <div class="row">
+        {% for item in value if item%}
+        <div class='col-4 col-sm-3 m-3 '>
+            <div class="container card text-dark bg-secondary mb-3 text-left " style="width: 18rem; height: 23rem;">
+                <a href="{{ item['url'] }}" target=”_blank”>
+                    <img class="img-manga zoom col rounded mx-auto d-block mt-1" src="{{ item['image'] }}"
+                        alt="{{ value['titre'] }}">
+
+                </a>
+                <a class="text-decoration-none text-dark" href="{{ item['url'] }}" target=”_blank”>
+                    <p class="text-left  mb-0 mt-1 fw-bolder">{{ item['titre'].replace('-',' ')|upper }}</p>
+                </a>
+                <p class="mb-0">({{ item['votes']|round|int }})
+                    {% for star in range(item['votes']|round|int) %}
+                    <i class="fa fa-star"></i>
+                    {%endfor%}
+                    {% if item['votes']|round|int < 5 %} {% for empty_star in range(5 - item['votes']|round|int) %} <i
+                        class="fa fa-star" style="color:rgba(250, 135, 135, 0.925);"></i>
+                        {%endfor%}
+                        {% endif %}
+                </p>
+                <p class="mb-0">{{ item['last_chapter'] }}<button class="text-decoration-none"
+                        style="background: none; border: none;" name="add_manga" value="{{ item['url']}}"><i
+                            class="fa-solid fa-circle-plus ms-1" style="color:rgba(2, 241, 42, 0.925);"></i></button>
+                </p>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+    <!-- <div class="container ms-0">
+        <div class='row'>
+            <div class='col-4 col-sm-2'>1</div>
+            <div class='col-4 col-sm-2'>2</div>
+            <div class='col-4 col-sm-2'>3</div>
+        </div>
+    </div> -->
+    {#
+    <!-- <div class="container ms-0">
+        <ul class="list-group list-group-horizontal flex-fill pb-2">
+            <li class="list-group-item flex-fill">
+                <a href="{{ value['url'] }}" target=”_blank”>
+                    <img class="img-manga zoom col border border-primary" src="{{ value['image'] }}"
+                        alt="{{ value['titre'] }}">
+                </a>
+            </li>
+            <li class="list-group-item flex-fill flex-column" style="display:flex; flex-direction:column;">
+                <a href="{{ value['url'] }}" target=”_blank”>
+                    <p class="text-center text-white bg-primary">{{ value['titre'].replace('-',' ')|upper }}</p>
+                </a>
+               <p class="text-dark text-sm-left">{{value['summary']}}</p>
+
+    <ul class="list-group list-group-horizontal-md flex-fill mt-3">
+        <li class="list-group-item list-group-flush" style="margin-top: auto;">{{ value['last_chapter']
+            }}</li>
+        <li class="list-group-item list-group-flush" style="margin-top: auto;">{{ value['votes'] }}
+        </li>
+    </ul>
+    </li>
+    </ul>
+    </div> -->#}
+    {% endfor %}
+
+</section>
+{% endblock body %}

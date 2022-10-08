@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+{% include "layouts/_header.html" %}
+
+<body class="skin-blue">
+    {% block page_body %}
+    <!-- LEFT MENU -->
+    {% include "layouts/_nav.html" %}
+    <!-- Content Wrapper. Contains page content color white-->
+    <div class="content-wrapper overflow-auto" style="height:100%;">
+
+        {% block messages %}
+        {% endblock messages %}
+
+        {# store the jinja2 context for form_rules rendering logic #}
+
+        {% block body %}
+        {% endblock body %}
+    </div>
+
+    {% endblock page_body%}
+</body>
+{% include "layouts/_source.html" %}
+
+</html>

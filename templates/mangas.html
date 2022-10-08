@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{{ super() }}
+
+<!-- Content Header (Page header) -->
+<section class="content-header ">
+    <h1>
+        MANGA LIST
+        <small>All Mangas Available in KOMGA</small>
+    </h1>
+
+</section>
+
+<section class="content overflow-auto">
+    {% for value in list_manga %}
+    <div class="container ms-0">
+        <ul class="list-group list-group-horizontal flex-fill pb-2">
+            <li class="list-group-item flex-fill">
+                <a href="{{ value['manga_url'] }}" target=”_blank”>
+                    <img class="img-manga zoom col border border-primary" src="{{ value['url'] }}"
+                        alt="{{ value['name'] }}">
+                </a>
+            </li>
+            <li class="list-group-item flex-fill flex-column" style="display:flex; flex-direction:column;">
+                <a href="{{ value['manga_url'] }}" target=”_blank”>
+                    <p class="text-center text-white bg-primary">{{ value['name'].replace('-',' ')|upper }}</p>
+                </a>
+                <p class="text-dark text-sm-left">{{value['summary']}}</p>
+
+                <ul class="list-group list-group-horizontal-md flex-fill mt-3">
+                    {% if value['last_chapter_read'] is defined %}
+                    {% if value['last_chapter_read'] == value['last_chapter_web'] %}
+                    <li class="list-group-item list-group-flush text-yellow" style="margin-top: auto;"><i
+                            class="fa-solid fa-circle-pause pe-2" style="color:rgba(255, 187, 0, 0.925);"></i>Waiting
+                        for
+                    </li>
+                    {%else%}
+                    <li class="list-group-item list-group-flush text-green" style="margin-top: auto;"><i
+                            class="fa-solid fa-spinner pe-2" style="color:green;"></i>In progress</li>
+                    {%endif%}
+                    <li class="list-group-item list-group-flush" style="margin-top: auto;">{{ value['last_chapter_read']
+                        }}/{{ value['last_chapter_web'] }}</li>
+                    <li class="list-group-item list-group-flush" style="margin-top: auto;">{{ value['reading_date'] }}
+                    </li>
+                    {% else %}
+                    <li class="list-group-item list-group-flush text-primary" style="margin-top: auto;"><i
+                            class="fa-solid fa-circle-play pe-2" style="color:rgb(5.1, 43.1, 99.2);"></i>Not
+                        started</li>
+                    <li class="list-group-item list-group-flush" style="margin-top: auto;">0/{{
+                        value['last_chapter_web'] }}</li>
+                    <li class="list-group-item list-group-flush" style="margin-top: auto;">-</li>
+                    {% endif %}
+                </ul>
+            </li>
+        </ul>
+    </div>
+    {% endfor %}
+
+</section>
+{% endblock body %}

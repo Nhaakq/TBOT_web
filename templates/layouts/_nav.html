@@ -1,0 +1,83 @@
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <a href="/admin">
+                    <img class="img-fluid" src="{{url_for('static',filename='img/lighthouse.png')}}" alt="logo">
+                </a>
+            </div>
+            <form action="#" method="get" class="sidebar-form mt-0">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
+                                class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <!-- search form -->
+
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu h-100">
+            <li class="header">NAVIGATION</li>
+            {% block main_menu %}
+            {% endblock %}
+            <li>
+                <a href="todolist" class="text-decoration-none">
+                    <i class="fa fa-list"></i> <span>Todo List</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-grey font-italic" data-bs-toggle="collapse" href="#MangaMenu" role="button"
+                    aria-expanded="false" aria-controls="MangaMenu">
+                    <i class="fa fa-book mr-3 fa-fw"></i>
+                    Manga
+                </a>
+                <div class="collapse nav-item ps-5" id="MangaMenu">
+                    <a href="/mangas" class="nav-link p-1">
+                        <i class="fa-regular fa-circle-dot fa-2xs pe-1"></i>
+                        Liste Manga
+                    </a>
+                    <a href="/search-manga" class="nav-link p-1">
+                        <i class="fa-regular fa-circle-dot fa-2xs pe-1"></i>
+                        Ajout Manga
+                    </a>
+                    <!-- <div class="form-outline input-group-sm mb-3 p-1 w-75">
+                        <input type="search" id="form1" class="form-control" placeholder="Add Manga"
+                            aria-label="Add Manga" />
+                    </div> -->
+                </div>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-grey font-italic">
+                    <i class="fa fa-home mr-3 fa-fw"></i>
+                    Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-grey font-italic">
+                    <i class="fa fa-address-card mr-3 fa-fw"></i>
+                    About
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-grey font-italic" data-bs-toggle="collapse" href="#collapseExample"
+                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <i class="fa fa-cubes mr-3 fa-fw"></i>
+                    Link with href
+                </a>
+                <div class="collapse nav-item" id="collapseExample">
+                    <a href="#" class="nav-link bg-secondary text-white font-italic ps-5">
+                        Services
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
